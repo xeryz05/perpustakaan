@@ -9,10 +9,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Dashboard - Your Best Marketplace</title>
+    <title>@yield('title')</title>
     @stack('prepend-style')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link href="style/main.css" rel="stylesheet" />
+    <link href="{{ url('style/main.css') }}" rel="stylesheet" />
     @stack('addon-style')
   </head>
 

@@ -9,10 +9,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Dashboard - Your Best Marketplace</title>
+    <title>@yield('title')</title>
     @stack('prepend-style')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link href="style/main.css" rel="stylesheet" />
+    <link href="{{ url('style/main.css') }}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
     @stack('addon-style')
   </head>
@@ -30,7 +30,7 @@
           <div class="list-group list-group-flush">
             <a
               href="{{ route('admin-dashboard') }}"
-              class="list-group-item list-group-item-action"
+              class="list-group-item list-group-item-action {{ (request()->is('admin')) ? 'active' : '' }}"
               >Dashboard</a
             >
             <a
@@ -39,8 +39,8 @@
               >Books</a
             >
             <a
-              href="#"
-              class="list-group-item list-group-item-action"
+              href="{{ route('category.index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : '' }}"
               >Categories</a
             >
             <a
