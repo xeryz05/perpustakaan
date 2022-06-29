@@ -34,8 +34,8 @@
               >Dashboard</a
             >
             <a
-              href="{{ route('dashboard-read') }}"
-              class="list-group-item list-group-item-action"
+              href="{{ route('book.index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/book*')) ? 'active' : '' }}"
               >Books</a
             >
             <a
@@ -44,8 +44,8 @@
               >Categories</a
             >
             <a
-              href="{{ route('dashboard-account') }}"
-              class="list-group-item list-group-item-action"
+              href="{{ route('user.index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active' : '' }}"
               >Users</a
             >
           </div>

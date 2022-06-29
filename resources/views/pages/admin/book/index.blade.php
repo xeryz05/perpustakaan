@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category Dashboard
+    Book | Dashboard
 @endsection
 
 @section('content')
@@ -12,9 +12,9 @@
     >
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Category</h2>
+            <h2 class="dashboard-title">Book</h2>
             <p class="dashboard-subtitle">
-                List of Categories
+                List of Book
             </p>
         </div>
         <div class="dashboard-content">
@@ -22,8 +22,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
-                                + Tambah Kategori Baru
+                            <a href="{{ route('book.create') }}" class="btn btn-primary mb-3">
+                                + Tambah Buku Baru
                             </a>
                             <div class="table-responsive">
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
@@ -31,8 +31,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>Slug</th>
+                                        <th>Author</th>
+                                        <th>Categori</th>
+                                        <th>File PDF</th>
+                                        <th>Description</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -59,8 +61,9 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'name'},
-                {data: 'photo', name: 'photo'},
-                {data: 'slug', name: 'slug'},
+                {data: 'author', name: 'author'},
+                {data: 'category.name', name: 'category.name'},
+                {data: 'pdf', name: 'pdf'},
                 {
                     data: 'action',
                     name: 'action',

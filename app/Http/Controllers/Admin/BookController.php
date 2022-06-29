@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Book;
 use App\Category;
 
-use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Requests\Admin\BookRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 
-class CategoryController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class CategoryController extends Controller
     public function index()
      {
         if (request()->ajax()) {
-            $query = Category::query();
+            $query = Book::query();
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -39,10 +40,10 @@ class CategoryController extends Controller
                                         Aksi
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                    <a class="dropdown-item" href="' . route('category.edit', $item->id) . '">
+                                    <a class="dropdown-item" href="' . route('book.edit', $item->id) . '">
                                         Sunting
                                     </a>
-                                    <form action="' . route('category.destroy', $item->id) . '" method="POST">
+                                    <form action="' . route('book.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -52,14 +53,14 @@ class CategoryController extends Controller
                             </div>
                     </div>';
                 })
-                ->editColumn('photo', function ($item) {
-                    return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 40px;"/>' : '';
+                ->editColumn('pdf', function ($item) {
+                    return $item->pdf ? '<a href="' . Storage::url($item->pdf) . '" style="max-height: 40px;"/>' : '';
                 })
-                ->rawColumns(['action', 'photo'])
+                ->rawColumns(['action'])
                 ->make();
         }
 
-        return view('pages.admin.category.index');
+        return view('pages.admin.book.index');
     }
 
     /**
@@ -69,7 +70,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.category.create');
+        $categories = Category::all();
+        return view('pages.admin.book.create',[
+            'categories' => $categories
+        ]);
+
     }
 
     /**
@@ -78,16 +83,16 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(BookRequest $request)
     {
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['pdf'] = $request->file('pdf')->store('assets/book/pdf', 'public');
 
-        Category::create($data);
+        Book::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('book.index');
     }
 
     /**
@@ -109,8 +114,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $item = Category::findOrFail($id);
-        return view('pages.admin.category.edit', [
+        $item = Book::findOrFail($id);
+        return view('pages.admin.book.edit', [
             'item' => $item
         ]);
     }
@@ -122,18 +127,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(BookRequest $request, $id)
     {
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
 
-        $item = Category::findOrFail($id);
+        $item = Book::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('book.index');
     }
 
     /**
@@ -144,9 +148,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = Book::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('book.index');
     }
 }

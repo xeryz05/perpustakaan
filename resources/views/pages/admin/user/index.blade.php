@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category Dashboard
+    User Dashboard
 @endsection
 
 @section('content')
@@ -12,9 +12,9 @@
     >
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Category</h2>
+            <h2 class="dashboard-title">User</h2>
             <p class="dashboard-subtitle">
-                List of Categories
+                List of Users
             </p>
         </div>
         <div class="dashboard-content">
@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
+                            <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">
                                 + Tambah Kategori Baru
                             </a>
                             <div class="table-responsive">
@@ -30,9 +30,10 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama</th>
+                                        <th>Nama User</th>
+                                        <th>Email User</th>
                                         <th>Foto</th>
-                                        <th>Slug</th>
+                                        <th>Roles User</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -59,8 +60,9 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
                 {data: 'photo', name: 'photo'},
-                {data: 'slug', name: 'slug'},
+                {data: 'roles', name: 'roles'},
                 {
                     data: 'action',
                     name: 'action',
