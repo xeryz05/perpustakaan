@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BookRead;
 use Illuminate\Http\Request;
 
 class DashboardReadController extends Controller
@@ -16,5 +17,10 @@ class DashboardReadController extends Controller
     public function index()
     {
         return view('pages.my-profile.dashboard-read');
+    }
+
+    public function detail ()
+    {
+
     }
 }

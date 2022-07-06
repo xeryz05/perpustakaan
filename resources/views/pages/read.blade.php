@@ -13,17 +13,15 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Bahasa Indonesia
-                </li>
+                <li class="breadcrumb-item"><a href="#">{{ $book->name }} Details</a></li>
+                <li class="breadcrumb-item"><a href="#">PDF {{ $book->name }}</a></li>
               </ol>
             </nav>
+            <iframe method="GET" type="application/pdf" src="{{  Storage::url($book->pdfs) }}"width="100%" height="100%"> </iframe>
           </div>
         </div>
-        <h4>Contoh menampilkan file pdf dengan tag embed</h4>
-        <iframe src="{{ url('pdf/BBT.pdf') }}" width="100%" height="700"></iframe>
         <div class="col-8 col-md-3">
-          <a href="/index.html" class="btn btn-success mt-4 px-4 btn-block">
+          <a href="{{ route('home') }}" class="btn btn-success mt-4 px-4 btn-block">
             Go to home
           </a>
         </div>

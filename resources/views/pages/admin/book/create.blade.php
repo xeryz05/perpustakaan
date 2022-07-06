@@ -58,8 +58,8 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Upload file pdf</label>
-                      <input type="file" class="form-control" name="pdf" placeholder="pdf" required />
+                      <label>Upload file photo</label>
+                      <input type="file" class="form-control" name="photo" placeholder="photo" required />
                     </div>
                   </div>
                   <div class="col-md-12">

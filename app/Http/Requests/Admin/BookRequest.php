@@ -28,7 +28,9 @@ class BookRequest extends FormRequest
             'author'=> 'required|max:100',
             'categories_id'=> 'required|exists:categories,id',
             'description' => 'required',
-            'pdf'=> 'required|required|file|mimes:pdf|max:2048'
+            'description' => 'required',
+            'photo' => 'required|image'
+            // 'pdf'=> 'required|required|file|mimes:pdf|max:2048'
         ];
     }
 }

@@ -11,10 +11,11 @@
         <div class="row">
           <div class="col-12">
             <nav aria-label="breadcrumb">
+
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Book Details
+                  {{ $book->name }} Details
                 </li>
               </ol>
             </nav>
@@ -25,22 +26,9 @@
     <section class="book-gallery" id="gallery">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8" data-aos="zoom-in">
-            <transition name="slide-fade" mode="out-in">
-              <img :key="photos[activePhoto].id" :src="photos[activePhoto].url" class="w-100 main-image" alt="" />
-            </transition>
-          </div>
-          <div class="col-lg-2">
-            <div class="row">
-              <div class="col-3 col-lg-12 mt-2 mt-lg-0" v-for="(photo, index) in photos" :key="photo.id"
-                data-aos="zoom-in" data-aos-delay="100">
-                <a href="#" @click="changeActive(index)">
-                  <img :src="photo.url" class="w-100 thumbnail-image" :class="{ active: index == activePhoto }"
-                    alt="" />
-                </a>
-              </div>
-            </div>
-          </div>
+            <picture>
+                <img src="{{  Storage::url($book->photo) }}" class="img-fluid mt-3" alt="Responsive image" style="max-height: 400px;">
+            </picture>
         </div>
       </div>
     </section>
@@ -48,14 +36,41 @@
       <section class="book-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-8">
-              <h1>Seni dan Budaya</h1>
-              <div class="owner"> By <a href="#" style="text-decoration: none;">Daffa</a></div>
-              <div class="categories"> <a href="#" style="text-decoration: none;">SMA X</a></div>
-            </div>
+
+                <div class="col-lg-8">
+                <h1>{{ $book->name }}</h1>
+                    <div class="owner"> By
+                        <a href="#"
+                        style="text-decoration: none;">
+                        {{ $book->author }}</a>
+                    </div>
+                    <div class="categories">
+                        <a href="#"
+                        style="text-decoration: none;">
+                        {{ $book->categories_id }}</a>
+                    </div>
+                </div>
+
             <div class="col-lg-2" data-aos="zoom-in">
-              <a class="btn btn-success nav-link px-4 text-white btn-block mb-3" href="/pdf.html">Read Book</a>
+            @auth()
+                <form action="{{ route('read', $book->slug) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button
+                        type="submit"
+                        class="btn btn-success nav-link px-4 text-white btn-block mb-3">
+                        Read Book
+                    </button>
+                </form>
+
+            @else
+            <a
+                class="btn btn-success nav-link px-4 text-white btn-block mb-3"
+                href="{{ route('login') }}">
+                Login to read
+            </a>
+            @endauth
             </div>
+
           </div>
         </div>
       </section>
@@ -64,18 +79,7 @@
           <div class="row">
             <div class="col-12 col-lg-8">
               <p>
-                The Nike Air Max 720 SE goes bigger than ever before with
-                Nike's tallest Air unit yet for unimaginable, all-day comfort.
-                There's super breathable fabrics on the upper, while colours
-                add a modern edge.
-              </p>
-              <p>
-                Bring the past into the future with the Nike Air Max 2090, a
-                bold look inspired by the DNA of the iconic Air Max 90.
-                Brand-new Nike Air cushioning underfoot adds unparalleled
-                comfort while transparent mesh and vibrantly coloured details
-                on the upper are blended with timeless OG features for an
-                edgy, modernised look.
+                {!! $book->description !!}
               </p>
             </div>
           </div>
@@ -126,42 +130,3 @@
     </div>
 </div>
 @endsection
-
-@push('addon-script')
-
-<script src="/vendor/vue/vue.js"></script>
-  <script>
-    var gallery = new Vue({
-      el: "#gallery",
-      mounted() {
-        AOS.init();
-      },
-      data: {
-        activePhoto: 3,
-        photos: [
-          {
-            id: 1,
-            url: "/images/product-details-1.jpg",
-          },
-          {
-            id: 2,
-            url: "/images/product-details-2.jpg",
-          },
-          {
-            id: 3,
-            url: "/images/product-details-3.jpg",
-          },
-          {
-            id: 4,
-            url: "/images/product-details-4.jpg",
-          },
-        ],
-      },
-      methods: {
-        changeActive(id) {
-          this.activePhoto = id;
-        },
-      },
-    });
-  </script>
-@endpush

@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-12 text-center">
           <p class="pt-4 pb-2">
-            2022 Copyright library. All Rights Reserved.
+            2022 Copyright. All Rights Reserved.
           </p>
         </div>
       </div>

@@ -56,6 +56,8 @@ class CategoryController extends Controller
                     return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 40px;"/>' : '';
                 })
                 ->rawColumns(['action', 'photo'])
+                ->removeColumn('id')
+                ->addIndexColumn()
                 ->make();
         }
 

@@ -54,12 +54,6 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Foto</label>
-                      <input type="file" class="form-control" name="photo" placeholder="Photo" required />
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
                       <label>Roles User</label>
                         <select name="roles" required class="form-control">
                             <option value="ADMIN">Admin</option>

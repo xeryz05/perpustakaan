@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BookRequest;
 
 use App\Book;
 use App\Category;
-
-use App\Http\Requests\Admin\BookRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -23,9 +22,9 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-     {
+    {
         if (request()->ajax()) {
-            $query = Book::query();
+            $query = Book::with(['category']);
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -53,10 +52,12 @@ class BookController extends Controller
                             </div>
                     </div>';
                 })
-                ->editColumn('pdf', function ($item) {
-                    return $item->pdf ? '<a href="' . Storage::url($item->pdf) . '" style="max-height: 40px;"/>' : '';
+                ->editColumn('photo', function ($item) {
+                    return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 100px;"/>' : '';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','photo'])
+                ->removeColumn('id')
+                ->addIndexColumn()
                 ->make();
         }
 
@@ -71,10 +72,10 @@ class BookController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view('pages.admin.book.create',[
             'categories' => $categories
         ]);
-
     }
 
     /**
@@ -87,8 +88,14 @@ class BookController extends Controller
     {
         $data = $request->all();
 
+        // dd($data);
+
+        // Log::info($data); // will show in your log
+
+        // var_dump($data);
+
         $data['slug'] = Str::slug($request->name);
-        $data['pdf'] = $request->file('pdf')->store('assets/book/pdf', 'public');
+        $data['photo'] = $request->file('photo')->store('assets/book', 'public');
 
         Book::create($data);
 
@@ -114,9 +121,12 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $item = Book::findOrFail($id);
-        return view('pages.admin.book.edit', [
-            'item' => $item
+        $item = Book::with(['category'])->findOrFail($id);
+        $categories = Book::all();
+
+        return view('pages.admin.book.edit',[
+            'item' => $item,
+            'categories' => $categories
         ]);
     }
 
@@ -132,6 +142,7 @@ class BookController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
+        $data['photo'] = $request->file('photo')->store('assets/book', 'public');
 
         $item = Book::findOrFail($id);
 
@@ -148,9 +159,10 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $item = Book::findOrFail($id);
+        $item = Book::findorFail($id);
         $item->delete();
 
         return redirect()->route('book.index');
+
     }
 }

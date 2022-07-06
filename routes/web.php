@@ -16,24 +16,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/categories', 'CategoryController@index')->name('categories');
+Route::get('/categories/search', 'CategoryController@search');
+
 Route::get('/categories/{id}', 'CategoryController@detail')->name('categories-detail');
+
 Route::get('/detail/{id}', 'DetailController@index')->name('detail');
-Route::get('/read/{id}', 'ReadController@index')->name('read');
+Route::post('/read/{id}', 'ReadController@index')->name('read');
 
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
 
-Route::group(['Middleware'=>['auth']], function(){
+Route::group(['middleware'=>['auth']], function(){
+
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
+
     Route::get('/dashboard-read', 'DashboardReadController@index')
         ->name('dashboard-read');
-    Route::get('/dashboard-read-details', 'DashboardReadDetailsController@index')->name('dashboard-read-details');
 
-    Route::get('/dashboard-account', 'DashboardAccountController@index')
+    Route::get('/dashboard-read-details', 'DashboardReadDetailsController@index')
+        ->name('dashboard-read-details');
+
+    Route::get('/dashboard-account', 'DashboardAccountController@account')
         ->name('dashboard-account');
+    Route::get('/dashboard-profile', 'DashboardAccountController@index')
+        ->name('dashboard-profile');
+    Route::get('/dashboard-profile-create', 'DashboardAccountController@update')
+        ->name('dashboard-profile-create');
+    Route::post('/dashboard/account/{redirect}', 'DashboardAccountController@update')
+        ->name('dashboard-account-redirect');
 
 });
 
@@ -45,6 +59,7 @@ Route::prefix('admin')
         Route::resource('category', 'CategoryController');
         Route::resource('user', 'UserController');
         Route::resource('book', 'BookController');
+        Route::resource('book-asset', 'BookAssetController');
     });
 
 Auth::routes();

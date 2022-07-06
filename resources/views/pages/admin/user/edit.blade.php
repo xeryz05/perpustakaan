@@ -57,12 +57,6 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Foto (Anda wajib mengisi ulang gambar ini)</label>
-                      <input type="file" class="form-control" name="photo" placeholder="Photo"/>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
                       <label>Roles User</label>
                         <select name="roles" required class="form-control">
                             <option value="{{ $item->roles }}" selected>tidak diganti</option>

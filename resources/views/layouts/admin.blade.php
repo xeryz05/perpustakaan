@@ -39,6 +39,11 @@
               >Books</a
             >
             <a
+              href="{{ route('book-asset.index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/book-asset*')) ? 'active' : '' }}"
+              >Upload PDF</a
+            >
+            <a
               href="{{ route('category.index') }}"
               class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : '' }}"
               >Categories</a
@@ -104,15 +109,19 @@
                     Hi, Angga
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/index.html"
-                      >Back to Store</a
-                    >
-                    <a class="dropdown-item" href="/dashboard-account.html"
-                      >Settings</a
+                    <a class="dropdown-item" href="{{ route('home') }}"
+                      >Back to Home</a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/">Logout</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                               Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                   </div>
+
                 </li>
                 <li class="nav-item">
                   <a class="nav-link d-inline-block mt-2" href="#">

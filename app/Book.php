@@ -9,22 +9,22 @@ class Book extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name','author','categories_id', 'description' , 'slug','pdf'
+        'name','author','categories_id', 'description' , 'slug','photo'
     ];
 
     protected $hidden = [
 
     ];
 
-    // // public function galleries() {
-    // //     return $this->hasMany(BookGallery::class, 'book_id', 'id')->withTrashed();
-    // // }
+    public function pdfs(){
+        return $this->hasMany(BookAsset::class, 'books_id', 'id' );
+    }
 
-    // public function user() {
-    //     return $this->hasOne(User::class, 'id', 'users_id');
-    // }
+    public function author() {
+        return $this->hasOne(User::class, 'id', 'author_id');
+    }
 
     public function category() {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
 }

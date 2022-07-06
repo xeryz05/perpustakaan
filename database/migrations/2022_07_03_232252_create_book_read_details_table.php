@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReadsTable extends Migration
+class CreateBookReadDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateReadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reads', function (Blueprint $table) {
+        Schema::create('book_read_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('books_id');
-            $table->integer('users_id');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateReadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reads');
+        Schema::dropIfExists('book_read_details');
     }
 }

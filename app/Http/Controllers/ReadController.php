@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Book;
 class ReadController extends Controller
 {
 
@@ -13,8 +13,13 @@ class ReadController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request, $id)
     {
-        return view('pages.read');
+        $book = Book::with(['author','category'])->where('slug', $id)->firstOrFail();
+
+        return view('pages.read',[
+            'book' => $book,
+
+        ]);
     }
 }

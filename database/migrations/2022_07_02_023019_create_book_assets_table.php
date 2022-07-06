@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookCoverTable extends Migration
+class CreateBookAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBookCoverTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_cover', function (Blueprint $table) {
+        Schema::create('book_assets', function (Blueprint $table) {
             $table->id();
-            $table->string('photos');
+            $table->string('pdfs');
             $table->integer('books_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateBookCoverTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_cover');
+        Schema::dropIfExists('book_assets');
     }
 }

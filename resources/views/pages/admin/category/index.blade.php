@@ -29,7 +29,8 @@
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        {{--  <th>ID</th>  --}}
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Foto</th>
                                         <th>Slug</th>
@@ -57,7 +58,8 @@
                 url:'{!! url()->current() !!}',
             },
             columns: [
-                {data: 'id', name: 'id'},
+                {{--  {data: 'id', name: 'id'},  --}}
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 {data: 'name', name: 'name'},
                 {data: 'photo', name: 'photo'},
                 {data: 'slug', name: 'slug'},

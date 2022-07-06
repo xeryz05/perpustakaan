@@ -29,12 +29,11 @@
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Author</th>
-                                        <th>Categori</th>
-                                        <th>File PDF</th>
-                                        <th>Description</th>
+                                        <th>kategori</th>
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -51,6 +50,7 @@
 @endsection
 @push('addon-script')
     <script>
+        // AJAX DataTablenn
         var datatable = $('#crudTable').DataTable({
             processing:true,
             serverSide:true,
@@ -59,11 +59,12 @@
                 url:'{!! url()->current() !!}',
             },
             columns: [
-                {data: 'id', name: 'id'},
+                //{{--  {data: 'id', name: 'id'},  --}} (dikomen karna untuk menghilangkan kolom id)
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 {data: 'name', name: 'name'},
                 {data: 'author', name: 'author'},
                 {data: 'category.name', name: 'category.name'},
-                {data: 'pdf', name: 'pdf'},
+                {data: 'photo', name: 'photo'},
                 {
                     data: 'action',
                     name: 'action',
