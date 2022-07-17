@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\BookRequest;
 
 use App\Book;
 use App\Category;
+use App\Comment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -53,9 +54,11 @@ class BookController extends Controller
                     </div>';
                 })
                 ->editColumn('photo', function ($item) {
-                    return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 100px;"/>' : '';
+                    return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 80px;"/>' : '';
+                    return $item->pdf ? '<iframe src="' . Storage::url($item->pdf) . '" style="max-height: 80px;"/>' : '';
                 })
-                ->rawColumns(['action','photo'])
+
+                ->rawColumns(['action','photo','pdf'])
                 ->removeColumn('id')
                 ->addIndexColumn()
                 ->make();
@@ -78,6 +81,20 @@ class BookController extends Controller
         ]);
     }
 
+    public function comment(Request $request)
+    {
+
+        // dd($request->all());
+        Comment::create([
+            'users_id' => request()->users_id,
+            'books_id' => request()->books_id,
+            'comment' => request()->comment,
+        ]);
+
+        $books = Book::with(['author'])->findOrFail(request()->books_id);
+        return redirect()->route('detail',$books->slug)->with('success','Komentar Success !!');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,6 +113,7 @@ class BookController extends Controller
 
         $data['slug'] = Str::slug($request->name);
         $data['photo'] = $request->file('photo')->store('assets/book', 'public');
+        $data['pdf'] = $request->file('pdf')->store('assets/pdf', 'public');
 
         Book::create($data);
 
@@ -143,6 +161,7 @@ class BookController extends Controller
 
         $data['slug'] = Str::slug($request->name);
         $data['photo'] = $request->file('photo')->store('assets/book', 'public');
+        $data['pdf'] = $request->file('pdf')->store('assets/pdf', 'public');
 
         $item = Book::findOrFail($id);
 

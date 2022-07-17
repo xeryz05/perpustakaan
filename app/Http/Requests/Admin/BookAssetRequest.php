@@ -24,7 +24,7 @@ class BookAssetRequest extends FormRequest
     public function rules()
     {
         return [
-            'books_id' => 'required|exists:books,id',
+            'books_id' => 'required|exists:books,id|unique:book_assets',
             'pdfs'=> 'required|file|mimes:pdf|max:2048',
         ];
     }

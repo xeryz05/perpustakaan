@@ -9,9 +9,9 @@ $factory->define(Book::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(mt_rand(2,8)),
         'author' => $faker->company,
-        'categories_id' => 15,
+        'categories_id' => 9,
         'description' => $faker->paragraph(mt_rand(5,10)),
-        'photo' => $faker->image('public/images',640,480, null, false),
+        'photo' => $faker->imageUrl(400, 300),
         'slug' => $faker->slug,
     ];
 });

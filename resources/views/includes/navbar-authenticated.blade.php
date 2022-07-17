@@ -50,22 +50,12 @@
                 <a href="/" class="dropdown-item">Logout</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link d-inline-block mt-2">
-                <img src="/images/icon-cart-empty.svg" alt="" />
-              </a>
-            </li>
           </ul>
 
           <ul class="navbar-nav d-block d-lg-none">
             <li class="nav-item">
               <a href="#" class="nav-link">
                 Hi, {{ Auth::user()->name }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link d-inline-block">
-                Cart
               </a>
             </li>
           </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
+use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
 
@@ -19,7 +20,7 @@ class CategoryController extends Controller
 
         $books = Book::paginate(16);
 
-        return view('pages.category',[
+        return view('pages.book',[
             'books' => $books
         ]);
     }
@@ -36,7 +37,7 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
         $books = Book::where('categories_id', $category->id)->paginate(32);
 
-        return view('pages.category',[
+        return view('pages.book',[
             'categories' => $categories,
             'books' => $books
         ]);
@@ -46,14 +47,9 @@ class CategoryController extends Controller
 	{
 		// menangkap data pencarian
 		$search = $request->search;
- 
-    	// mengambil data dari table pegawai sesuai pencarian data
-		$categories = Book::table('category')
-		->where('name','like',"%".$search."%")
-		->paginate();
- 
-    		// mengirim data pegawai ke view index
-		return view('index',['category' => $categories]);
- 
+
+        $books = Book::where('name', 'like', "%" . $search . "%")->paginate(5);
+        return view('pages.book', compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
+
 	}
 }

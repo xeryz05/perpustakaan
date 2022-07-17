@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-6">
               <h2>
-                Membaca Untuk membuka wawasan,
+                Membaca Untuk membuka wawasan
                 menjadi lebih mudah
               </h2>
                 <form method="POST" action="{{ route('login') }}" class="mt-3">
@@ -46,7 +46,7 @@
                         </div>
                         <button
                             type="submit"
-                            class="btn btn-success btn-block w-75 mt-4"
+                            class="btn btn-success w-75 btn-block mt-4"
                         >
                             Sign In to My Account
                         </button>

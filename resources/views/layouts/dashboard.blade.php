@@ -32,11 +32,6 @@
               >Dashboard</a
             >
             <a
-              href="{{ route('dashboard-read') }}"
-              class="list-group-item list-group-item-action {{ (request()->is('dashboard-read*')) ? 'active' : '' }}"
-              >Daftar Baca Buku</a
-            >
-            <a
               href="{{ route('dashboard-profile') }}"
               class="list-group-item list-group-item-action {{ (request()->is('dashboard-profile*')) ? 'active' : '' }}"
               >My Account</a
@@ -122,11 +117,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     Hi, {{ Auth::user()->name }}
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link d-inline-block" href="#">
-                    Cart
                   </a>
                 </li>
               </ul>

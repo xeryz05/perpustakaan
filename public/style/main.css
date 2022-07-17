@@ -10890,25 +10890,8 @@ footer p {
   margin-top: 30px;
 }
 
-.page-home .store-new-products {
-  margin-top: 10px;
-}
-
-.page-home .book-carousel .carousel-indicators li {
-  background-color: gold;
-  border-radius: 100%;
-  width: 10px;
-  height: 10px;
-}
-
-.page-home .book-carousel .carousel-indicators li.active {
-  background-color: green;
-}
-
-.page-home .book-carousel .carousel-item img {
-  max-width: 100%;
-  height: 267px;
-  background-size: cover;
+.page-home .book-new-books {
+  margin-top: 30px;
 }
 
 .page-categories h5 {

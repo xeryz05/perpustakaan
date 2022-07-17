@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
-use App\Read;
+use App\Comment;
+use App\Favorite;
+use App\Category;
+use App\BookAsset;
 use Illuminate\Support\Facades\Auth;
 class DetailController extends Controller
 {
@@ -17,11 +20,32 @@ class DetailController extends Controller
      */
     public function index(Request $request, $id)
     {
-        $book = Book::with(['author','category'])->where('slug', $id)->firstOrFail();
-
+        $books = Book::with(['author','category'])->where('slug', $id)->firstOrFail();
+        $comment = Comment::where('books_id',$books->id)->with('user')->get();
+        // dd($comment);
+        // dd($comment);
         return view('pages.detail',[
-            'book' => $book,
+            'book' => $books,
+            'comment' => $comment,
+        ]);
+    }
+    public function add(Request $request, $id)
+    {
+        $data = [
+            'books_id' => $id,
+            'users_id' => Auth::user()->id
+        ];
+        // dd($data);
+        Favorite::create($data);
 
+        return redirect()->route('favorite');
+    }
+
+    public function read(Request $request, $id)
+    {
+        $books = Book::with(['author','category'])->where('slug', $id)->firstOrFail();
+        return view('pages.read',[
+            'book' => $books,
         ]);
     }
 }

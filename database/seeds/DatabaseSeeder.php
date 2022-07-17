@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Book;
+use App\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // factory(App\User::class,20)->create();
-        // factory(App\Category::class, 12)->create();
-        factory(App\Book::class, 40)->create();
-        
+        // factory(App\Category::class, 8)->create();
+        factory(App\Book::class, 12)->create();
+
     }
 }

@@ -9,16 +9,16 @@ class Book extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name','author','categories_id', 'description' , 'slug','photo'
+        'name','author','categories_id', 'description' , 'slug','photo','pdf'
     ];
 
     protected $hidden = [
 
     ];
 
-    public function pdfs(){
-        return $this->hasMany(BookAsset::class, 'books_id', 'id' );
-    }
+    // public function pdf(){
+    //     return $this->hasMany(BookAsset::class, 'books_id', 'id' );
+    // }
 
     public function author() {
         return $this->hasOne(User::class, 'id', 'author_id');

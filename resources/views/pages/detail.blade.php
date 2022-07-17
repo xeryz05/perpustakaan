@@ -3,6 +3,9 @@
 @section('title')
     Detail | Perpus
 @endsection
+@push('addon-style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+@endpush
 
 @section('content')
 <div class="page-content page-details">
@@ -25,7 +28,7 @@
     </section>
     <section class="book-gallery" id="gallery">
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <picture>
                 <img src="{{  Storage::url($book->photo) }}" class="img-fluid mt-3" alt="Responsive image" style="max-height: 400px;">
             </picture>
@@ -39,38 +42,49 @@
 
                 <div class="col-lg-8">
                 <h1>{{ $book->name }}</h1>
-                    <div class="owner"> By
-                        <a href="#"
-                        style="text-decoration: none;">
-                        {{ $book->author }}</a>
-                    </div>
-                    <div class="categories">
-                        <a href="#"
-                        style="text-decoration: none;">
-                        {{ $book->categories_id }}</a>
+                    <div class="owner">
+                        <ul>
+                            <li>
+                                Author | {{ $book->author }}
+                            </li>
+                            <li>
+                                Kategori | {{ $book->category->slug }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
             <div class="col-lg-2" data-aos="zoom-in">
-            @auth()
-                <form action="{{ route('read', $book->slug) }}" method="POST" enctype="multipart/form-data">
+                @auth()
+                    <form
+                        action="{{ route('detail-add',$book->id) }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        >
                     @csrf
-                    <button
-                        type="submit"
-                        class="btn btn-success nav-link px-4 text-white btn-block mb-3">
-                        Read Book
-                    </button>
-                </form>
-
-            @else
-            <a
-                class="btn btn-success nav-link px-4 text-white btn-block mb-3"
-                href="{{ route('login') }}">
-                Login to read
-            </a>
-            @endauth
+                        <a type="submit"><i class="bi bi-file-earmark-plus"></i>
+                            Add to favorite
+                        </a>
+                    </form>
+                @endauth
             </div>
+            <div class="col-lg-2" data-aos="zoom-in">
+                @auth()
+                    <a
+                        type="submit"
+                        href="{{ route('read', $book->slug) }}"
+                        ><i class="bi bi-book-half"></i>
+                        Read Book
+                    </a>
 
+                @else
+                    <a
+                        class="btn btn-outline-success nav-link px-4 text-green btn-block mb-3"
+                        href="{{ route('login') }}"
+                        ><i class="bi bi-door-open"></i>
+                        Login
+                    </a>
+                @endauth
+            </div>
           </div>
         </div>
       </section>
@@ -85,48 +99,76 @@
           </div>
         </div>
       </section>
-      <section class="book-review">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-lg-8 mt-3 mb-3">
-              <h5>Customer Review (3)</h5>
+      <section class="books-review">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-lg-8 mt-3 mb-3">
+                <h5>Komentar</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-lg-6">
+                @if (count($comment) > 0)
+
+                @foreach ($comment as $item)
+                <ul class="list-unstyled">
+
+                  <li class="media">
+                    <img
+                      src="{{ $item->user->profile_photo_path ?? 'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                      alt=""
+                      class="mr-3 rounded-circle"
+                    />
+                    <div class="media-body">
+                    <h5 class="mt-2 mb-1">{{ $item->user->name }}</h5>
+                    {{ $item->comment }}
+                    </div>
+                  </li>
+
+
+
+                </ul>
+                @endforeach
+                @auth
+                       <div class="media-body my-4">
+                     <form action="{{ route('commentar') }}" method="POST">
+                       @csrf
+                        <input type="hidden" name="books_id" value="{{ $book->id }}">
+                        <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+
+                        <textarea name="comment" placeholder="Masukan Pesan" cols="20" rows="5" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-success mt-2"> Send</button>
+                     </form>
+                    </div>
+                   @endauth
+                @else
+                <ul class="list-unstyled">
+                  <li class="media">
+                   Belum Ada Comentar
+
+                  </li>
+
+                   @auth
+                       <div class="media-body my-4">
+                     <form action="{{ route('commentar') }}" method="POST">
+                       @csrf
+                        <input type="hidden" name="books_id" value="{{ $book->id }}">
+                        <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+
+                        <textarea name="comment" placeholder="Masukan Pesan" cols="20" rows="5" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-success mt-2"> Send</button>
+                     </form>
+                    </div>
+                   @endauth
+
+                </ul>
+
+                @endif
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 col-lg-8">
-              <ul class="list-unstyled">
-                <li class="media">
-                  <img src="/images/icon-testimonial-1.png" class="mr-3 rounded-circle" alt="" />
-                  <div class="media-body">
-                    <h5 class="mt-2 mb-1">Hazza Risky</h5>
-                    I thought it was not good for living room. I really happy
-                    to decided buy this Book last week now feels like
-                    homey.
-                  </div>
-                </li>
-                <li class="media my-4">
-                  <img src="/images/icon-testimonial-2.png" class="mr-3 rounded-circle" alt="" />
-                  <div class="media-body">
-                    <h5 class="mt-2 mb-1">Anna Sukkirata</h5>
-                    Color is great with the minimalist concept. Even I thought
-                    it was made by Cactus industry. I do really satisfied with
-                    this.
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="/images/icon-testimonial-3.png" class="mr-3 rounded-circle" alt="" />
-                  <div class="media-body">
-                    <h5 class="mt-2 mb-1">Dakimu Wangi</h5>
-                    When I saw at first, it was really awesome to have with.
-                    Just let me know if there is another upcoming book like
-                    this.
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
 </div>
 @endsection
+
