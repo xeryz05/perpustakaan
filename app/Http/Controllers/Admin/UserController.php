@@ -52,7 +52,11 @@ class UserController extends Controller
                             </div>
                     </div>';
                 })
-                ->rawColumns(['action', 'photo'])
+                ->editColumn('avatar', function($item) {
+                    return $item->avatar ? '<image src="' . Storage::url($item->avatar) .'" style="max-height: 80px;"/>' : '' ;
+                })
+
+                ->rawColumns(['action', 'avatar'])
                 ->removeColumn('id')
                 ->addIndexColumn()
                 ->make();
@@ -82,6 +86,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $data['password'] = bcrypt($request->password);
+        $data['avatar'] = $request->file('avatar')->store('assets/user', 'public');
 
         User::create($data);
 
@@ -123,6 +128,8 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $data = $request->all();
+
+        $data['avatar'] = $request->file('avatar')->store('assets/user', 'public');
 
         if ($request->password) {
             $data['password'] = bcrypt($request->password);

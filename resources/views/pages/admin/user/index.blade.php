@@ -31,7 +31,7 @@
 							{{--  <p>Add class <code></code></p>  --}}
 						</div>
 						<div class="pull-right">
-							<a href="{{ route('user.create') }}" class="btn btn-primary btn-sm" ><i class="icon-copy fa fa-plus-circle"></i> Add Cetegory</a>
+							<a href="{{ route('user.create') }}" class="btn btn-primary btn-sm" ><i class="icon-copy fa fa-plus-circle"></i> Add Users</a>
 						</div>
 					</div>
                     <div class="table-responsive">
@@ -41,6 +41,7 @@
                                     <th>No</th>
                                     <th>Nama User</th>
                                     <th>Email User</th>
+                                    <th>Avatar</th>
                                     <th>Roles User</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -73,6 +74,7 @@
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'avatar', name: 'avatar'},
                 {data: 'roles', name: 'roles'},
                 {
                     data: 'action',

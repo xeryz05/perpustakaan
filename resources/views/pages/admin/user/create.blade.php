@@ -67,10 +67,16 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
+                                                        <label>Upload file avatar</label>
+                                                        <input type="file" class="form-control" name="avatar" placeholder="avatar" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
                                                             <label>Roles User</label>
                                                                 <select name="roles" required class="form-control">
-                                                                    <option value="TEACHER">Teacher</option>
-                                                                    <option value="STUDENT">Student</option>
+                                                                    <option value="ADMIN">Admin</option>
+                                                                    <option value="USER">User</option>
                                                                 </select>
                                                         </div>
                                                     </div>

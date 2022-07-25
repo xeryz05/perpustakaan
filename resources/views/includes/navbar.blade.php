@@ -48,9 +48,10 @@
                         data-toggle="dropdown"
                     >
                         <img
-                            src="/images/icon-user.png"
+                            src="{{asset('storage/'. Auth::user()->avatar )}}"
                             alt="user"
                             class="rounded-circle mr-2 profile-picture"
+                            style="border:1px solid; border-radius:50%; width:50px; height:50px;"
                         />
                         Hi, {{ Auth::user()->name }}
                     </a>

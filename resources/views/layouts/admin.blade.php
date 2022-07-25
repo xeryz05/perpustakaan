@@ -86,7 +86,10 @@
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 						<span class="user-icon">
-							<img src="{{ ('vendors/images/photo1.jpg') }}" alt="">
+                            <img src="{{asset('storage/'. Auth::user()->avatar )}}"
+                                width="128px"
+                                alt=""
+                                style="border:1px solid; border-radius:50%; width:50px; height:50px;">
 						</span>
 						<span class="user-name">{{ Auth::user()->name }}</span>
 					</a>
@@ -144,36 +147,26 @@
 						<ul class="submenu">
 							<li>
                                 <a href="{{ route('category.index') }}" class=" {{ (request()->is('admin/category*')) ? 'active' : '' }}">
-                                    Form Create Category
+                                    Form Create Categories
                                 </a>
                             </li>
 							<li>
                                 <a href="{{ route('user.index') }}" class=" {{ (request()->is('admin/user*')) ? 'active' : '' }}">
-                                    Form Create User
+                                    Form Create Users
                                 </a>
                             </li>
 							<li>
                                 <a href="{{ route('book.index') }}" class=" {{ (request()->is('admin/book*')) ? 'active' : '' }}">
-                                    Form Create User
+                                    Form Create Books
                                 </a>
                             </li>
 						</ul>
 					</li>
-					<li>
+					{{--  <li>
 						<a href="{{ route('kalender.index') }}" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-calendar1"></span><span class="mtext">Calendar</span>
 						</a>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-analytics-21"></span><span class="mtext">Charts</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="highchart.html">Highchart</a></li>
-							<li><a href="knob-chart.html">jQuery Knob</a></li>
-							<li><a href="jvectormap.html">jvectormap</a></li>
-							<li><a href="apexcharts.html">Apexcharts</a></li>
-						</ul>
+					</li>  --}}
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>
@@ -222,6 +215,6 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
-    </script>  --}}  --}}
+    </script>  --}}
     @stack('addon-script')
 </html>

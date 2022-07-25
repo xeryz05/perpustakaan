@@ -3,6 +3,19 @@
 @section('title')
     Read | Perpus
 @endsection
+@stack('prepend-script')
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script type="text/jscript">
+    function injectJS(){
+        var frame =  $('iframe');
+        var contents =  frame.contents();
+        var body = contents.find('body').attr("oncontextmenu", "return false");
+        var body = contents.find('body').append('<div>New Div</div>');
+    }
+    </script>
+@stack('addon-script')
 
 @section('content')
 
@@ -35,8 +48,10 @@
     <div class="row">
         <iframe src="{{  Storage::url($book->pdf) }}#toolbar=0"
             class="mt-3"
-            style="width:100%; height: 500px"
-            frameborder='0'
+            style="width:100%; height: 650px"
+            frameborder='2'
+            id="myiframe"
+            onload="injectJS()"
         >
         </iframe>
     </div>

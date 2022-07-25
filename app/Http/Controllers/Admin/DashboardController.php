@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Book;
 use App\Category;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -19,11 +20,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $akun = user::count();
+        // $akun = user::count();
+        $users = User::where('roles','user')->count();
+        $admins = User::where('roles','admin')->count();
+
+        // $roles = User::where('users_id',$roles->id)->count();
         $book = book::count();
         $category = category::count();
         return view('pages.admin.dashboard',[
-            'akun' => $akun,
+            'users' => $users,
+            'admins' => $admins,
             'book' => $book,
             'category' => $category
         ]);

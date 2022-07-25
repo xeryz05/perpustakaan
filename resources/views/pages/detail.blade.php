@@ -115,8 +115,9 @@
 
                   <li class="media">
                     <img
-                      src="{{ $item->user->profile_photo_path ?? 'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                      src="{{asset('storage/'. Auth::user()->avatar )}}"
                       alt=""
+                      style="border:1px solid; border-radius:50%; width:50px; height:50px;"
                       class="mr-3 rounded-circle"
                     />
                     <div class="media-body">
