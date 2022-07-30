@@ -19,9 +19,11 @@ class CategoryController extends Controller
     {
 
         $books = Book::paginate(16);
+        $categories = Category::take(6)->get();
 
         return view('pages.book',[
-            'books' => $books
+            'books' => $books,
+            'categories' => $categories
         ]);
     }
 

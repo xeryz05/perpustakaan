@@ -50,12 +50,7 @@
                         >
                             Sign In to My Account
                         </button>
-                        <a
-                            href="{{ route('register') }}"
-                            class="btn btn-signup btn-block w-75 mt-2"
-                        >
-                            Sign Up
-                        </a>
+
                         @if (Route::has('password.request'))
                         <button type="submit" class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}

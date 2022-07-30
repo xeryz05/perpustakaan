@@ -30,21 +30,12 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
-
-        {{--  <!-- Global site tag (gtag.js) - Google Analytics -->  --}}
-        <script async src="{{ url('https://www.googletagmanager.com/gtag/js?id=UA-119386393-1') }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-
             gtag('config', 'UA-119386393-1');
         </script>
-
-
-    {{--  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link href="{{ url('style/main.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>  --}}
     @stack('addon-style')
   </head>
 
@@ -67,20 +58,9 @@
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
-			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
-			<div class="header-search">
-			</div>
 		</div>
 
 		<div class="header-right">
-			<div class="user-notification">
-				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-						<i class="icon-copy dw dw-notification"></i>
-						<span class="badge notification-active"></span>
-					</a>
-				</div>
-			</div>
 			{{--  <!-- User Dropdown -->  --}}
 			<div class="user-info-dropdown">
 				<div class="dropdown">
@@ -162,11 +142,6 @@
                             </li>
 						</ul>
 					</li>
-					{{--  <li>
-						<a href="{{ route('kalender.index') }}" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-calendar1"></span><span class="mtext">Calendar</span>
-						</a>
-					</li>  --}}
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>
@@ -194,27 +169,13 @@
 	<script type="text/javascript" src="{{ asset('vendors/scripts/script.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('vendors/scripts/process.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('src/plugins/apexcharts/apexcharts.min.js') }}"></script>
+
 	<script type="text/javascript" src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
+    <script src="https://kit.fontawesome.com/5da34a61e8.js" crossorigin="anonymous"></script>
 
-
-    {{--  <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  --}}
-    {{--  <script>
-      AOS.init();
-    </script>
-    {{--  <!-- Menu Toggle Script -->  --}}
-    {{--  <script>
-      $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-      });
-    </script>  --}}
     @stack('addon-script')
 </html>

@@ -66,11 +66,6 @@ Route::prefix('admin')
         // Route::resource('book-asset', 'BookAssetController');
     });
 
-Auth::routes();
-Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
-
-
-
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

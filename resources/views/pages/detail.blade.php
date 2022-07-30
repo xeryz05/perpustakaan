@@ -53,7 +53,7 @@
                         </ul>
                     </div>
                 </div>
-            <div class="col-lg-2" data-aos="zoom-in">
+            {{--  <div class="col-lg-2" data-aos="zoom-in">
                 @auth()
                     <form
                         action="{{ route('detail-add',$book->id) }}"
@@ -66,7 +66,7 @@
                         </a>
                     </form>
                 @endauth
-            </div>
+            </div>  --}}
             <div class="col-lg-2" data-aos="zoom-in">
                 @auth()
                     <a
@@ -115,7 +115,7 @@
 
                   <li class="media">
                     <img
-                      src="{{asset('storage/'. Auth::user()->avatar )}}"
+                      src="{{asset('storage/'. $item->user->avatar )}}"
                       alt=""
                       style="border:1px solid; border-radius:50%; width:50px; height:50px;"
                       class="mr-3 rounded-circle"

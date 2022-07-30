@@ -23,9 +23,9 @@
                 <a href="{{ route('categories') }}" class="nav-link">Category Books</a>
             </li>
             @guest
-                <li class="nav-item">
+                {{--  <li class="nav-item">
                     <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
-                </li>
+                </li>  --}}
                 <li class="nav-item">
                     <a
                     href="{{  route('login') }}"

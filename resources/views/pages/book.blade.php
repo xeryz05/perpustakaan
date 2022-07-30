@@ -30,6 +30,30 @@
     <section class="book-new-books">
       <div class="container">
         <div class="row">
+            @php
+                $incrementCategory = 0
+            @endphp
+            @forelse ($categories as $category)
+              <div
+                class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="{{ $incrementCategory+= 100 }}">
+                <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block" >
+                    <div class="categories-image">
+                        <img src="{{  Storage::url($category->photo) }}" class="w-100" />
+                    </div>
+                        <p class="categories-text">
+                        {{ $category->name }}
+                        </p>
+                </a>
+            </div>
+            @empty
+                <div class="col-12 text-center py-5"
+                    data-aos="fade-up"
+                    data-aos-delay="100">
+                No Category Found
+                </div>
+            @endforelse ()
+        </div>
+        <div class="row">
           <div class="col-12" data-aos="fade-up">
             <h5>New Books</h5>
           </div>
