@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\BookExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
@@ -183,5 +185,10 @@ class BookController extends Controller
 
         return redirect()->route('book.index');
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new BookExport, 'book.xlsx');
     }
 }

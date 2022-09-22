@@ -105,7 +105,8 @@
                         <div class="books-thumbnail">
                             <div class="books-image" style="
                                 @if($book->photo)
-                                    background-image: url('{{  Storage::url($book->photo)}}');
+                                    /* background-image: url('{{  Storage::url($book->photo)}}'); */
+                                     background-image: url('{{  $book->photo  }}');
                                 @else
                                     bacground-color: #40ff40;
                                 @endif

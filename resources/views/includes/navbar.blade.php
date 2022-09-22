@@ -20,6 +20,16 @@
                 <a href="{{ route('home') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
+                @auth()
+                    <a href="{{ route('tamu') }}" class="nav-link">
+                        Absen Pengunjung
+                    </a>
+                @else
+
+                @endauth
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('categories') }}" class="nav-link">Category Books</a>
             </li>
             @guest
@@ -56,7 +66,7 @@
                         Hi, {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('admin-dashboard') }}" class="dropdown-item">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
                         <a href="" class="dropdown-item">
                             Settings
                         </a>

@@ -5,7 +5,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Auth\Events\Login;
-use Laravel\Socialite\Two\GoogleProvider;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +26,11 @@ Route::get('/categories/search', 'CategoryController@search');
 Route::get('/categories/{id}', 'CategoryController@detail')->name('categories-detail');
 
 Route::get('/details/{id}', 'DetailController@index')->name('detail');
-Route::post('/details/{id}', 'DetailController@add')->name('detail-add');
-Route::get('/read/{id}', 'DetailController@read')->name('read');
 
 Route::group(['middleware'=>['auth']], function(){
 
-    Route::DELETE('/favorite/{id}', 'FavoriteController@delete')->name('delete-favorite');
-    Route::get('/favorite', 'FavoriteController@index')->name('favorite');
-
+    // Route::DELETE('/favorite/{id}', 'FavoriteController@delete')->name('delete-favorite');
+    // Route::get('/favorite', 'FavoriteController@index')->name('favorite');
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
 
@@ -43,27 +40,33 @@ Route::group(['middleware'=>['auth']], function(){
     Route::POST('comentar-user','Admin\BookController@comment')
         ->name('commentar');
 
-    Route::get('/dashboard-profile', 'DashboardAccountController@index')
+    Route::get('/my-profile/profile/dashboard-profile', 'DashboardAccountController@index')
         ->name('dashboard-profile');
 
-    Route::get('/dashboard-profile-create', 'DashboardAccountController@update')
+    Route::get('/my-profile/profile/dashboard-profile-create', 'DashboardAccountController@uploadFoto')
         ->name('dashboard-profile-create');
 
     Route::post('/dashboard/account/{redirect}', 'DashboardAccountController@update')
         ->name('dashboard-account-redirect');
 
+    Route::get('/tamu', 'TamuController@index')->name('tamu');
+    Route::post('/tamu/store', 'TamuController@store')->name('tamu.store');
+
+    Route::post('/details/{id}', 'DetailController@add')->name('detail-add');
+    Route::get('/read/{id}', 'DetailController@read')->name('read');
 });
 
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['auth','admin'])
     ->group(function (){
-        Route::get('/', 'DashboardController@index')->name('admin-dashboard');
+        Route::get('/dashboard', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('category', 'CategoryController');
         Route::resource('user', 'UserController');
         Route::resource('book', 'BookController');
-        Route::resource('kalender', 'KalenderController');
-        // Route::resource('book-asset', 'BookAssetController');
+        // Route::get('/dashboard/export', 'DashboardController@export');
+        Route::get('/admin/user/export', 'UserController@export');
+        Route::get('/admin/book/export', 'BookController@export');
     });
 
 Auth::routes(['register' => false]);

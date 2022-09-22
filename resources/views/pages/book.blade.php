@@ -82,6 +82,7 @@
                         </div>
                         <div class="books-author">
                             {{ $book->category->slug }}
+                            {{--  {{ $book->category->slug }}  --}}
                         </div>
                     </a>
                 </div>

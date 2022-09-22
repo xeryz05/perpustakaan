@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Comment;
 use App\Favorite;
-use App\Category;
+use App\User;
 use App\BookAsset;
 use Illuminate\Support\Facades\Auth;
 class DetailController extends Controller
@@ -22,13 +22,19 @@ class DetailController extends Controller
     {
         $books = Book::with(['author','category'])->where('slug', $id)->firstOrFail();
         $comment = Comment::where('books_id',$books->id)->with('user')->get();
+        $user = Auth::user();
+
         // dd($comment);
         // dd($comment);
         return view('pages.detail',[
             'book' => $books,
             'comment' => $comment,
+            'user' => $user,
         ]);
     }
+
+
+
     public function add(Request $request, $id)
     {
         $data = [

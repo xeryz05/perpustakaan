@@ -40,8 +40,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama User</th>
+                                    <th>UserName</th>
+                                    <th>NIS</th>
                                     <th>Email User</th>
                                     <th>Avatar</th>
+                                    <th>Gender</th>
                                     <th>Roles User</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -73,8 +76,11 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 {data: 'name', name: 'name'},
+                {data: 'username', name: 'username'},
+                {data: 'NIS', name: 'NIS'},
                 {data: 'email', name: 'email'},
                 {data: 'avatar', name: 'avatar'},
+                {data: 'gender', name: 'gender'},
                 {data: 'roles', name: 'roles'},
                 {
                     data: 'action',

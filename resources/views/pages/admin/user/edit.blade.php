@@ -18,7 +18,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">User Tables</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Tables</li>
                             </ol>
                         </nav>
                     </div>
@@ -49,8 +49,20 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label>Nama User</label>
+                                                            <label>Nama</label>
                                                                 <input type="text" class="form-control" name="name"  value="{{ $item->name }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>NIS</label>
+                                                                <input type="number" class="form-control" name="nis"  value="{{ $item->nis }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Username</label>
+                                                                <input type="text" class="form-control" name="username" value="{{ $item->username }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -72,7 +84,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                         <label>Upload file avatar</label>
-                                                        <input type="file" class="form-control" name="avatar" placeholder="avatar" required />
+                                                        <input type="file" class="form-control" name="avatar" placeholder="avatar" required
                                                         <small class="text-muted">
                                                             Kosongkan jika tidak ingin mengubah avatar
                                                         </small>

@@ -3,6 +3,7 @@
 @section('title')
     Dashboard | Perpus
 @endsection
+
 @section('content')
     {{--  <!-- Isi Dashboard -->  --}}
 	<div class="main-container">
@@ -10,7 +11,7 @@
 			<div class="card-box pd-20 height-100-p mb-30">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="vendors/images/banner-img.png" alt="">
+						<img src="{{ asset('images/banner-img.png') }}" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
@@ -78,7 +79,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         Visitor</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalPengunjung }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-users fa-2x text-gray-300"></i>

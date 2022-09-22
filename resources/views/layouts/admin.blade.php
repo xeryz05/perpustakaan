@@ -12,6 +12,8 @@
     <title>@yield('title')</title>
     @stack('prepend-style')
 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css"/>
+
         {{--  <!-- Site favicon -->  --}}
         <link rel="apple-touch-icon" sizes="180x180" href="{{ URL::asset('vendors/images/logo2.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ URL::asset('vendors/images/logo2.png') }}">
@@ -41,9 +43,9 @@
 
   <body>
         {{--  <!-- Loading -->  --}}
-        {{--  <div class="pre-loader">
+        <div class="pre-loader">
             <div class="pre-loader-box">
-                <div class="loader-logo"><img src="{{ URL::asset('vendors/images/logo1.png') }}" style="max-height: 50px" alt=""></div>
+                <div class="loader-logo"><img src="{{ URL::asset('images/logo.png') }}" style="max-height: 170px" alt=""></div>
                 <div class='loader-progress' id="progress_div">
                     <div class='bar' id='bar1'></div>
                 </div>
@@ -52,7 +54,7 @@
                     Loading...
                 </div>
             </div>
-        </div>  --}}
+        </div>
 
     {{--  <!-- Navbar -->  --}}
 	<div class="header">
@@ -98,8 +100,8 @@
         {{--  <!-- left Sidebar -->  --}}
 	<div class="left-side-bar">
 		<div class="brand-logo">
-			<a href="index.html">
-				<img src="{{ ('vendors/images/logo1.png') }}" alt="" class="light-logo">
+			<a href="{{ route('home') }}">
+				<img src="{{ asset('images/logo1.png') }}" alt="" class="light-logo">
 			</a>
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
@@ -150,7 +152,7 @@
 							<span class="micon dw dw-user"></span><span class="mtext">User</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="profile.html">Profile</a></li>
+							<li><a href="{{ route('dashboard-profile') }}">Profile</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -164,6 +166,7 @@
 {{--  <!-- Bootstrap core JavaScript -->  --}}
     @stack('prepend-script')
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
     <!-- js -->
 	<script type="text/javascript" src="{{ asset('vendors/scripts/core.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('vendors/scripts/script.min.js') }}"></script>

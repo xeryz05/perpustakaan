@@ -56,7 +56,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                         <label>Foto</label>
-                                                        <input type="file" class="form-control" name="photo" placeholder="Photo" required />
+                                                        <input type="file" class="form-control" name="photo" placeholder="Photo" />
                                                         </div>
                                                     </div>
                                                 </div>

@@ -42,7 +42,7 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('category.update', $item->id) }}" method="post" enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
                                         <div class="card">
@@ -57,7 +57,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                         <label>Foto</label>
-                                                        <input type="file" class="form-control" name="photo" placeholder="Photo" required />
+                                                        <input type="file" class="form-control" name="photo" placeholder="Photo" required/>
                                                         <small>Wajib mengisi foto ini lagi</small>
                                                         </div>
                                                     </div>

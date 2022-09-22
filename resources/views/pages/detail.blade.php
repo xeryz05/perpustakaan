@@ -48,34 +48,30 @@
                                 Author | {{ $book->author }}
                             </li>
                             <li>
-                                Kategori | {{ $book->category->slug }}
+                                Kategori | {{ $book->slug }}
+                                {{--  Kategori | {{ $book->category->slug }}  --}}
+                            </li>
+                            <li>
+                                View | {{ $book->visitor }}
                             </li>
                         </ul>
                     </div>
                 </div>
-            {{--  <div class="col-lg-2" data-aos="zoom-in">
-                @auth()
-                    <form
-                        action="{{ route('detail-add',$book->id) }}"
-                        method="POST"
-                        enctype="multipart/form-data"
-                        >
-                    @csrf
-                        <a type="submit"><i class="bi bi-file-earmark-plus"></i>
-                            Add to favorite
-                        </a>
-                    </form>
-                @endauth
-            </div>  --}}
             <div class="col-lg-2" data-aos="zoom-in">
                 @auth()
+                    <button type="button"
+                        class="btn btn-outline-primary nav-link px-4 text-green btn-block mb-3"
+                        data-toggle="modal"
+                        data-target="#staticBackdrop">
+                        Absen
+                    </button>
                     <a
+                        class="btn btn-outline-success nav-link px-4 text-green btn-block mb-3"
                         type="submit"
                         href="{{ route('read', $book->slug) }}"
                         ><i class="bi bi-book-half"></i>
                         Read Book
                     </a>
-
                 @else
                     <a
                         class="btn btn-outline-success nav-link px-4 text-green btn-block mb-3"
@@ -88,6 +84,46 @@
           </div>
         </div>
       </section>
+      <!-- Modal -->
+      @auth
+          <div class="modal fade"
+                id="staticBackdrop"
+                data-backdrop="false"
+                data-keyboard="false"
+                tabindex="1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+                >
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Absen Pengunjung</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                         <label>Name</label>
+                            <input type="text" class="form-control" value="{{ $user->name }}" >
+                    </div>
+                    <div class="form-group">
+                         <label>Userame</label>
+                            <input type="text" class="form-control" value="{{ $user->username }}">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+            </div>
+        </div>
+        </div>
+      @endauth
+      <!-- Button trigger modal -->
       <section class="book-description">
         <div class="container">
           <div class="row">
@@ -125,9 +161,6 @@
                     {{ $item->comment }}
                     </div>
                   </li>
-
-
-
                 </ul>
                 @endforeach
                 @auth
@@ -165,6 +198,7 @@
                 </ul>
 
                 @endif
+
               </div>
             </div>
           </div>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Category;
 use App\Book;
+
+use App\User;
+use App\Category;
+use App\Pengunjung;
+use Illuminate\Support\Facades\Request;
+
 class HomeController extends Controller
 {
 
@@ -15,15 +18,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Pengunjung $pengunjung)
     {
-        $categories = Category::all();
-        $books = Book::take(8)->get();
+        $categories = Category::take(6)->get();
+        $books = Book::all();
+        $user = User::all();
 
-        
+        $userAgent = Request::server('HTTP_USER_AGENT');
+        $cekUserAgent = $pengunjung::where('user_agent', $userAgent)->first();
+        if($cekUserAgent == null){
+            $pengunjung::create([
+                'user_agent' => $userAgent
+            ]);
+        }
+        // ddd($cekUserAgent);
+
         return view('pages.home',[
             'categories' => $categories,
-            'books' => $books
+            'books' => $books,
+            'user' => $user
         ]);
 
     }

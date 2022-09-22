@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class UserController extends Controller
@@ -85,6 +88,8 @@ class UserController extends Controller
     {
         $data = $request->all();
 
+        var_dump($data);
+
         $data['password'] = bcrypt($request->password);
         $data['avatar'] = $request->file('avatar')->store('assets/user', 'public');
 
@@ -101,7 +106,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -157,5 +162,10 @@ class UserController extends Controller
         $item->delete();
 
         return redirect()->route('user.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'user.xlsx');
     }
 }

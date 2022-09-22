@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->integer('categories_id');
             $table->longtext('description');
             $table->string('photo');
-            $table->string('pdf');
+            $table->string('pdf')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
