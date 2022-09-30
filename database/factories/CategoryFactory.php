@@ -9,6 +9,6 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'slug' => $faker->name,
-        'photo' => ('https://source.unsplash.com/random'),
+        // 'photo' => ('https://source.unsplash.com/random'),
     ];
 });

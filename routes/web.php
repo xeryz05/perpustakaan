@@ -63,10 +63,13 @@ Route::prefix('admin')
         Route::get('/dashboard', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('category', 'CategoryController');
         Route::resource('user', 'UserController');
+        Route::resource('export', 'UserController@export');
         Route::resource('book', 'BookController');
+        Route::resource('poster', 'PosterController');
+        Route::resource('tamu', 'TamuController');
         // Route::get('/dashboard/export', 'DashboardController@export');
-        Route::get('/admin/user/export', 'UserController@export');
-        Route::get('/admin/book/export', 'BookController@export');
+        // Route::get('/admin/user/export', 'UserController@export');
+        // Route::get('/admin/book/export', 'BookController@export');
     });
 
 Auth::routes(['register' => false]);

@@ -1,0 +1,21 @@
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($users as $user)
+        <tr>
+            <td>(($user->name))</td>
+            <td>(($user->username))</td>
+            <td>(($user->NIS))</td>
+            <td>(($user->email))</td>
+            <td>(($user->avatar))</td>
+            <td>(($user->gender))</td>
+            <td>(($user->roles))</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>

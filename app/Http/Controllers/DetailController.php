@@ -8,10 +8,11 @@ use App\Comment;
 use App\Favorite;
 use App\User;
 use App\BookAsset;
+use App\Pengunjung;
 use Illuminate\Support\Facades\Auth;
 class DetailController extends Controller
 {
-
+    
 
     /**
      * Show the application dashboard.
@@ -30,21 +31,8 @@ class DetailController extends Controller
             'book' => $books,
             'comment' => $comment,
             'user' => $user,
+            'totalPengunjung' => Pengunjung::count(),
         ]);
-    }
-
-
-
-    public function add(Request $request, $id)
-    {
-        $data = [
-            'books_id' => $id,
-            'users_id' => Auth::user()->id
-        ];
-        // dd($data);
-        Favorite::create($data);
-
-        return redirect()->route('favorite');
     }
 
     public function read(Request $request, $id)

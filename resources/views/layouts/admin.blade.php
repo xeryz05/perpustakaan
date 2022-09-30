@@ -77,8 +77,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+						<a class="dropdown-item" href="{{route('dashboard-profile')}}"><i class="dw dw-settings2"></i> Setting</a>
 						<div>
                             <a class="dropdown-item"
                                 href="{{ route('logout') }}"
@@ -140,6 +139,30 @@
 							<li>
                                 <a href="{{ route('book.index') }}" class=" {{ (request()->is('admin/book*')) ? 'active' : '' }}">
                                     Form Create Books
+                                </a>
+                            </li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-house-1"></span><span class="mtext">Poster</span>
+						</a>
+						<ul class="submenu">
+							<li>
+                                <a href="{{ route('poster.index') }}" class="{{ (request()->is('admin/poster')) ? 'active' : '' }}">
+                                    Poster
+                                </a>
+                            </li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-house-1"></span><span class="mtext">Daftar Tamu</span>
+						</a>
+						<ul class="submenu">
+							<li>
+                                <a href="{{ route('tamu.index') }}" class="{{ (request()->is('admin/tamu')) ? 'active' : '' }}">
+                                    Daftar Tamu
                                 </a>
                             </li>
 						</ul>

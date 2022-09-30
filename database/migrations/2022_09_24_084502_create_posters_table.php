@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTamusTable extends Migration
+class CreatePostersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateTamusTable extends Migration
      */
     public function up()
     {
-        Schema::create('tamus', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('users_id');
-            $table->enum('status_absen', ['1','0']);
-            $table->date('tgl_absen');
+        Schema::create('posters', function (Blueprint $table) {
+            $table->id();
+            $table->string('photo_poster');
             $table->timestamps();
-            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateTamusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tamus');
+        Schema::dropIfExists('posters');
     }
 }

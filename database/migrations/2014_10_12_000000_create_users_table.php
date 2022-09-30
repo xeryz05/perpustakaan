@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->integer('categories_id');
             $table->string('name');
             $table->string('username')->unique();
             $table->string('NIS')->unique();
@@ -30,7 +31,6 @@ class CreateUsersTable extends Migration
             $table->integer('zip_code');
             $table->string('country');
             $table->string('phone_number');
-            $table->integer('categories_id');
 
 
             $table->softDeletes();

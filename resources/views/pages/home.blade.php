@@ -10,6 +10,7 @@
       <div class="container">
         <div class="row">
             <div class="col-lg-12" data-aos="zoom-in">
+                @foreach($poster as $pstr)
               <div
                 id="bookCarousel"
                 class="carousel slide"
@@ -22,32 +23,18 @@
                     class="active"
                   ></li>
                   <li data-target="#bookCarousel" data-slide-to="1"></li>
-                  <li data-target="#bookCarousel" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img
-                      src="{{ asset('images/banner_smait.jpg') }}"
-                      class="d-block w-100"
-                      alt="Carousel Image"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      src="{{ asset('images/banner_smait2.jpg') }}"
-                      class="d-block w-100"
-                      alt="Carousel Image"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      src="/images/banner.jpg"
+                      src="{{  Storage::url($pstr->photo_poster) }}"
                       class="d-block w-100"
                       alt="Carousel Image"
                     />
                   </div>
                 </div>
               </div>
+              @endforeach
             </div>
         </div>
       </div>
@@ -67,9 +54,6 @@
               <div
                 class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="{{ $incrementCategory+= 100 }}">
                 <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block" >
-                    <div class="categories-image">
-                        <img src="{{  Storage::url($category->photo) }}" class="w-100" />
-                    </div>
                         <p class="categories-text">
                         {{ $category->name }}
                         </p>
@@ -106,7 +90,7 @@
                             <div class="books-image" style="
                                 @if($book->photo)
                                     /* background-image: url('{{  Storage::url($book->photo)}}'); */
-                                     background-image: url('{{  $book->photo  }}');
+                                     background-image: url('{{  Storage::url($book->photo)  }}');
                                 @else
                                     bacground-color: #40ff40;
                                 @endif

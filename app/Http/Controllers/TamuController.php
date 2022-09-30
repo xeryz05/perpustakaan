@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tamu;
 use App\User;
+use App\Book;
 use App\Pengunjung;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class TamuController extends Controller
 
     public function index()
     {
+
         $user = Auth::user();
         return view('pages.tamu',[
             'user' => $user,
@@ -46,13 +48,13 @@ class TamuController extends Controller
 
 public function store(Tamu $tamu, Request $request)
     {
- 
+
         $idUser = User::where('NIS', $request->nis)->first(); //variable $idUser akan cek  nis yang diinput user ke database, jika data yang dicari tidak ada maka akan bernilai null
 
         if($idUser == null){// pada line ini jika $idUser bernilau null maka nis yang di input salah
                 return \response()->json('NIS Yang Kamu Masukan Salah');
                 exit;
-        }elseif($idUser != null){// pada line ini jika $idUser tidak null 
+        }elseif($idUser != null){// pada line ini jika $idUser tidak null
             if($idUser->id !== Auth::id()){//maka ambil id user nya lalu cocokan dengan id user saat login. Jika id tidak sama maka sudah dipastikan nis tersebut bukan milik dia
                 return \response()->json('NIS Ini Bukan Punya kamu');
                 exit;
@@ -80,14 +82,14 @@ public function store(Tamu $tamu, Request $request)
                     }
         }
         
-        // else{
-        //     Tamu::create([
-        //         'users_id' => Auth::id(),
-        //         'status_absen' => 1,
-        //         'tgl_absen' => date('Y-m-d')
-        //     ]);
-        //     return \response()->json('Terimakasih Anda Sudah Berhasil Absen');
-        //     exit;
-        // }
+        else{
+            Tamu::create([
+                'users_id' => Auth::id(),
+                'status_absen' => 1,
+                'tgl_absen' => date('Y-m-d')
+            ]);
+            return \response()->json('Terimakasih Anda Sudah Berhasil Absen');
+            exit;
+        }
     }
 }

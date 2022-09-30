@@ -79,7 +79,7 @@
                                                         <div class="form-group">
                                                         <label>Upload PDF</label>
                                                         <input type="file" class="form-control" name="pdf" placeholder="pdf" required />
-                                                        <small>Max Size : 2MB</small>
+                                                        <small>Max Size : 12MB</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">

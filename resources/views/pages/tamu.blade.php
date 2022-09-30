@@ -12,13 +12,14 @@
 
     <title>Document</title>
 </head>
-<body class="bg-success p-2 text-dark bg-opacity-25">
+<body class="p-2 text-dark bg-opacity-25" 
+    style="background-image: linear-gradient(to right, rgba(61,203,26) , rgba(187,199,22));">
     <div class="container">
         <div class="row m-4 justify-content-center col-md-12">
-            <div class="col-sm-7">
+            <div class="col-sm-7 pt-5">
               <div class="card text-center">
                 <div class="card-body">
-                  <h5 class="card-title">Total Pengunjung</h5>
+                  <h5 class="card-title">Total Pengunjung Perpustakaan</h5>
                   {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                   <a href="#" class="btn btn-primary">{{ $totalPengunjung }}</a>
                 </div>
@@ -26,13 +27,13 @@
             </div>
           </div>
 
-          <div class="row m-4 justify-content-center col-md-12">
+          <div class="row m-4 justify-content-center col-md-12" style="padding-top: 10px;">
             <div class="col-sm-7">
                 <div class="card">
                     <h5 class="card-header">Absen Pengunjung</h5>
                     <div class="card-body">
                       <h5 class="card-title">Masukan NIS</h5>
-                      <form action="{{ url('/tamu/store') }}" method="post" id="formAbsen">
+                      <form action="" method="post" id="formAbsen">
                         @csrf
                         <div class="form-group">
                                 <input type="text" class="form-control" name="nis" id="NIS" placeholder="Masukkan Username atau NIS">
@@ -40,7 +41,9 @@
                 
                     </form>
                     <button id="submit" class="btn btn-outline-success col-12" style="margin-top: 10px">Submit</button>
-                      {{-- <a href="#" class="btn btn-success">Go somewhere</a> --}}
+                        <div class="pt-4"> 
+                            <a href="{{route('home')}}" class="btn btn-success col-12">Home</a>
+                        </div>
                     </div>
                   </div>
             </div>
@@ -82,6 +85,7 @@
                     'Terjadi Error Pada Server',
                     'error'
                 );
+                console.log(data);
             }
        });
     })

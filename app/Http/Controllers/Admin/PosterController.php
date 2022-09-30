@@ -3,18 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Category;
-
-use App\Http\Requests\Admin\CategoryRequest;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+
+use App\Poster;
+use App\Http\Requests\Admin\PosterRequest;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
-
-class CategoryController extends Controller
+class PosterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +18,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-     {
+    {
         if (request()->ajax()) {
-            $query = Category::query();
+            $query = Poster::query();
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -39,10 +35,10 @@ class CategoryController extends Controller
                                         Aksi
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                    <a class="dropdown-item" href="' . route('category.edit', $item->id) . '">
+                                    <a class="dropdown-item" href="' . route('poster.edit', $item->id) . '">
                                         Sunting
                                     </a>
-                                    <form action="' . route('category.destroy', $item->id) . '" method="POST">
+                                    <form action="' . route('poster.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -52,13 +48,17 @@ class CategoryController extends Controller
                             </div>
                     </div>';
                 })
-                ->rawColumns(['action'])
+                ->editColumn('photo_poster', function($item) {
+                    return $item->photo_poster ? '<image src="' . Storage::url($item->photo_poster) .'" style="max-height: 80px;"/>' : '' ;
+                })
+
+                ->rawColumns(['action','photo_poster'])
                 ->removeColumn('id')
                 ->addIndexColumn()
                 ->make();
         }
 
-        return view('pages.admin.category.index');
+        return view('pages.admin.poster.index');
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.category.create');
+        return view('pages.admin.poster.create');
     }
 
     /**
@@ -77,16 +77,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(PosterRequest $request)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        // $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['photo_poster'] = $request->file('photo_poster')->store('assets/poster','public');
 
-        Category::create($data);
+        Poster::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('poster.index');
     }
 
     /**
@@ -108,9 +107,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $item = Category::findOrFail($id);
-        return view('pages.admin.category.edit', [
-            'item' => $item
+        $item = Poster::findOrFail($id);
+        return view('pages.admin.poster.edit', [
+            'item' => $item,
         ]);
     }
 
@@ -121,18 +120,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(PosterRequest $request, $id)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        // $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['photo_poster'] = $request->file('photo_poster')->store('assets/poster', 'public');
 
-        $item = Category::findOrFail($id);
+        $item = Poster::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('poster.index');
     }
 
     /**
@@ -143,9 +141,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = Poster::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('poster.index');
     }
 }

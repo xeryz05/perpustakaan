@@ -28,6 +28,8 @@
 					<div class="clearfix mb-20">
 						<div class="pull-left">
 							<h4 class="text-blue h4">User Table</h4>
+                            <!-- <a href="/pdf" class="btn btn-danger">Export PDF</a> -->
+                            <a href="{{ route('user.index') }}"class="btn btn-danger"> Export</a>
 							{{--  <p>Add class <code></code></p>  --}}
 						</div>
 						<div class="pull-right">

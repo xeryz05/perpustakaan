@@ -51,7 +51,8 @@ class CategoryController extends Controller
 		$search = $request->search;
 
         $books = Book::where('name', 'like', "%" . $search . "%")->paginate(5);
-        return view('pages.book', compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $categories = Category::where('name', 'like', "%" . $search . "%");
+        return view('pages.book', compact('books','categories'))->with('i', (request()->input('page', 1) - 1) * 5);
 
 	}
 }

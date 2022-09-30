@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Create Book | Perpus
+    Daftar Tamu | Perpus
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 							<div class="title">
-								<h4>Category Tables</h4>
+								<h4>Daftar Tamu</h4>
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Book Tables</li>
+									<li class="breadcrumb-item active" aria-current="page">Daftar Tamu</li>
 								</ol>
 							</nav>
 						</div>
@@ -27,27 +27,28 @@
                 <div class="pd-20 card-box mb-30">
 					<div class="clearfix mb-20">
 						<div class="pull-left">
-							<h4 class="text-blue h4">Category Table</h4>
-							{{--  <p>Add class <code></code></p>  --}}
-						</div>
-						<div class="pull-right">
-							<a href="{{ route('category.create') }}" class="btn btn-primary btn-sm" ><i class="icon-copy fa fa-plus-circle"></i> Add Cetegory</a>
+							<h4 class="text-blue h4">Daftar Tamu</h4>
 						</div>
 					</div>
                     <div class="table-responsive">
                         <table class="table table-striped" id="crudTable">
                             <thead>
                                 <tr>
-                                        {{--  <th>ID</th>  --}}
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        
-                                        <th>Slug</th>
-                                        <th>Aksi</th>
-                                    </tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NIS</th>
+                                    <th>Waktu</th>
+                                </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($absen as $index => $data)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $data->user->name }}</td>
+                                    <td>{{ $data->user->NIS }}</td>
+                                    <td>{{ $data->created_at }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -61,7 +62,7 @@
         </div>
 </body>
 @endsection
-@push('addon-script')
+{{-- @push('addon-script')
     <script>
         var datatable = $('#crudTable').DataTable({
             processing:true,
@@ -71,11 +72,10 @@
                 url:'{!! url()->current() !!}',
             },
             columns: [
-                {{--  {data: 'id', name: 'id'},  --}}
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                {data: 'name', name: 'name'},
-            
-                {data: 'slug', name: 'slug'},
+                {data: 'user.name', name: 'user.name'},
+                {data: 'NIS', name: 'NIS'},
+                {data: 'tgl_absen', name: 'tgl_absen'},
                 {
                     data: 'action',
                     name: 'action',
@@ -86,6 +86,5 @@
             ]
         })
     </script>
-@endpush
-
+@endpush --}}
 

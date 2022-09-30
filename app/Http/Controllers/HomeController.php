@@ -6,6 +6,7 @@ use App\Book;
 
 use App\User;
 use App\Category;
+use App\Poster;
 use App\Pengunjung;
 use Illuminate\Support\Facades\Request;
 
@@ -23,6 +24,7 @@ class HomeController extends Controller
         $categories = Category::take(6)->get();
         $books = Book::all();
         $user = User::all();
+        $poster = Poster::take(1)->get();
 
         $userAgent = Request::server('HTTP_USER_AGENT');
         $cekUserAgent = $pengunjung::where('user_agent', $userAgent)->first();
@@ -36,6 +38,7 @@ class HomeController extends Controller
         return view('pages.home',[
             'categories' => $categories,
             'books' => $books,
+            'poster' => $poster,
             'user' => $user
         ]);
 

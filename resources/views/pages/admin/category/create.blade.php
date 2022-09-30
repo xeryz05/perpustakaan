@@ -53,12 +53,6 @@
                                                         <input type="text" class="form-control" name="name" required />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                        <label>Foto</label>
-                                                        <input type="file" class="form-control" name="photo" placeholder="Photo" />
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col text-right">

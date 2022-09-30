@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Create | Dashboard
+    Create Poster | Dashboard
 @endsection
 
 @section('content')
@@ -13,13 +13,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="title">
-                            <h4>Edit Category</h4>
+                            <h4>Create Poster</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Category Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Category Edit</li>
+                                <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User Tables</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">User Tables</li>
                             </ol>
                         </nav>
                     </div>
@@ -42,16 +42,15 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <form action="{{ route('category.update', $item->id) }}" method="post" enctype="multipart/form-data">
-                                        @method('PUT')
+                                    <form action="{{ route('poster.store') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                        <label>Nama Kategori</label>
-                                                        <input type="text" class="form-control" name="name" value="{{ $item->name }}" required />
+                                                        <label>Upload Photo Poster</label>
+                                                        <input type="file" class="form-control" name="photo_poster" placeholder="photo_poster" required />
                                                         </div>
                                                     </div>
                                                 </div>

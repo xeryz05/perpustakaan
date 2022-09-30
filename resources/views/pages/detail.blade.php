@@ -52,19 +52,13 @@
                                 {{--  Kategori | {{ $book->category->slug }}  --}}
                             </li>
                             <li>
-                                View | {{ $book->visitor }}
+                                View | {{ $totalPengunjung }}
                             </li>
                         </ul>
                     </div>
                 </div>
             <div class="col-lg-2" data-aos="zoom-in">
                 @auth()
-                    <button type="button"
-                        class="btn btn-outline-primary nav-link px-4 text-green btn-block mb-3"
-                        data-toggle="modal"
-                        data-target="#staticBackdrop">
-                        Absen
-                    </button>
                     <a
                         class="btn btn-outline-success nav-link px-4 text-green btn-block mb-3"
                         type="submit"

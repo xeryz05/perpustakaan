@@ -28,8 +28,8 @@ class BookRequest extends FormRequest
             'author'=> 'required|max:100',
             'categories_id'=> 'required|exists:categories,id',
             'description' => 'required',
-            'photo' => 'image|max:1048',
-            'pdf'=> 'required|file|mimes:pdf|max:5048',
+            'photo' => 'image|max:1048|required',
+            'pdf'=> 'required|file|mimes:pdf|max:12048',
             // 'pdf'=> 'required|required|file|mimes:pdf|max:2048'
         ];
     }
